@@ -1,79 +1,86 @@
 <template>
-  <div>
-    <div style="width: 100%;">
-      <el-button @click="openImage" type="primary">打开文件</el-button>
-    </div>
-    <div style="display: flex;justify-items: center;justify-content: center;">
-      <el-image :fit="image_fit" style="width: 300px; height: 300px;margin: 40px;" :src="image_base64">
-        <template #error>
-          <div class="image-slot">
-            <div style="width: 300px;height: 300px;align-items: center;line-height: 300px;text-align: center;">暂无图片
-            </div>
+  <div class="common-layout">
+    <el-container class="layout-container-demo">
+      <el-aside width="100px" height="100%">
+        <el-menu default-active="2" @open="handleOpen" @close="handleClose">
+          <el-menu-item index="single" @click="openPage">
+            <span>单图抠图</span>
+          </el-menu-item>
+          <el-menu-item index="batch" @click="openPage">
+            <span>批量抠图</span>
+          </el-menu-item>
+          <el-menu-item index="setting" @click="openPage">
+            <span>系统设置</span>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
+      <el-container>
+        <!-- <el-header>
+          <div style="background-color: aqua;height: 30px;width: 100%;"></div>
+        </el-header> -->
+        <el-main>
+          <div>
+            <Single v-show="page == 'single'"></Single>
+            <Batch v-show="page == 'batch'"></Batch>
+            <Setting v-show="page == 'setting'"></Setting>
           </div>
-        </template>
-      </el-image>
-      <el-image v-loading="loading" :fit="image_fit" style="width: 300px; height: 300px;margin: 40px;"
-        :src="matting_base64">
-        <template #error>
-          <div class="image-slot">
-            <div style="width: 300px;height: 300px;align-items: center;line-height: 300px;text-align: center;">暂无图片
-            </div>
-          </div>
-        </template>
-      </el-image>
-    </div>
-    <div style="width: 100%;text-align: center;">
-      <el-button :loading="loading" style="width: 120px;" @click="matting" type="error">抠图</el-button>
-    </div>
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
-<script>
-import { invoke } from '@tauri-apps/api/tauri'
-import { ElMessage } from 'element-plus'
-export default {
-  data() {
-    return {
-      loading: false,
-      image_base64: "",
-      image_path: "",
-      matting_base64: "",
-      matting_path: "",
-      image_fit: "contain"
-    }
-  },
-  methods: {
-    openImage() {
-      let that = this;
-      invoke('open_image').then(res => {
-        console.log(res)
-        that.image_base64 = res.image_base64;
-        that.image_path = res.image_path;
-      })
-    },
-    matting() {
-      let that = this;
-      that.loading = true;
-      console.log(this.image_path);
-      invoke('matting_image', { filePath: this.image_path }).then(res => {
-        console.log(res);
-        ElMessage({
-          type: 'success',
-          showClose: true,
-          message: "处理完成",
-          center: true,
-        })
-        that.matting_base64 = res.image_base64;
-        that.matting_path = res.image_path;
-        that.loading = false;
-      }, err => {
-        ElMessage.error(err)
-        that.loading = false;
-      })
-    }
-  }
+<script setup>
+
+import Single from './components/single.vue'
+import Batch from './components/batch.vue'
+import Setting from './components/setting.vue'
+import { ref } from 'vue'
+
+const page = ref("single")
+
+const handleOpen = (key, keyPath) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key, keyPath) => {
+  console.log(key, keyPath)
+}
+
+const openPage = (event) => {
+  console.log(event)
+  page.value = event.index;
+  console.log(page)
 }
 
 </script>
 
-<style scoped></style>
+<style>
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.layout-container-demo .el-aside {
+  height: 100vh;
+  background-color: #FFFFFF;
+  border-right: #b9b9b9 1px solid;
+}
+
+
+.layout-container-demo .el-header {
+  height: 30px;
+  padding: 0px;
+}
+
+.layout-container-demo .el-main {
+  padding: 0px;
+}
+
+.layout-container-demo .el-main {
+  padding: 0px;
+}
+
+.layout-container-demo .el-footer {
+  padding: 0px;
+}
+</style>

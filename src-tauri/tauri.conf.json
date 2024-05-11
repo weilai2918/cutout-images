@@ -19,9 +19,9 @@
     },
     "windows": [
       {
-        "title": "cutout-app",
-        "width": 800,
-        "height": 600
+        "title": "抠图工具",
+        "width": 1000,
+        "height": 700
       }
     ],
     "security": {

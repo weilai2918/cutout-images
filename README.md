@@ -1,7 +1,20 @@
-# Tauri + Vue 3
+### 项目名称： CutoutImages - 桌面抠图工具
 
-This template should help get you started developing with Tauri + Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+CutoutImages是一款创新的桌面应用程序，旨在为用户提供便捷、高效的图像抠图解决方案。结合了 Tauri 的强大桌面应用开发能力和 Vue 3 的现代前端技术框架，本软件旨在打造一个既轻量级又功能强大的图形处理工具，特别适合内容创作者、设计师以及需要快速进行图像处理的广大用户。
 
-## Recommended IDE Setup
+### 核心技术栈：
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+Tauri: 作为核心开发框架，Tauri 允许我们利用 Rust 的高性能与安全性来构建跨平台的桌面应用，同时无缝集成Web技术栈，确保应用的小体积和高响应速度。
+
+Vue 3: 作为前端界面构建的基础，Vue 3 提供了更强大的组件系统、更好的性能优化以及 Composition API，使得界面设计更加灵活高效，用户体验流畅自然。
+
+#### 申请抠图的接口：https://www.remove.bg/zh   注册账号，API抠图每天可以抠图50张，创建密钥
+
+
+### 功能列表
+
+[x] 单图抠图
+
+[x] 批量抠图
+
+[ ] 抠图接口秘钥更换

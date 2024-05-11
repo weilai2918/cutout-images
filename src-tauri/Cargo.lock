@@ -717,6 +717,7 @@ name = "cutout-app"
 version = "0.0.0"
 dependencies = [
  "base64 0.22.0",
+ "rand 0.8.5",
  "reqwest",
  "rfd",
  "serde",
